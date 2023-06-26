@@ -53,14 +53,7 @@ describe("PATCH /items/:name", function () {
         expect(response.statusCode).toBe(404);
     });
 });
-describe("DELETE /items/:name", function () {
-    test("Deletes a single a item", async function () {
-        const response = await request(app)
-            .delete(`/items/${item.name}`);
-        expect(response.statusCode).toBe(200);
-        expect(response.body).toEqual({ message: "deleted" });
-    });
-});
+
 
 describe("POST /items", function () {
     test("Creates a new item", async function () {
@@ -78,5 +71,13 @@ describe("POST /items", function () {
     });
 });
 
+describe("DELETE /items/:name", function () {
+    test("Deletes a single a item", async function () {
+        const response = await request(app)
+            .delete(`/items/${item.name}`);
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toEqual({ message: "deleted" });
+    });
+});
 
 
