@@ -35,7 +35,24 @@ describe("GET /items/:name", function () {
         expect(response.statusCode).toBe(404);
     });
 });
+describe("PATCH /items/:name", function () {
+    test("Updates a single item", async function () {
+        const response = await request(app)
+            .patch(`/items/${item.name}`)
+            .send({
+                name: "Troll"
+            });
+        expect(response.statusCode).toBe(200);
+        expect(response.body.item).toEqual({
+            name: "Troll"
+        });
+    });
 
+    test("Responds with 404 if can't find item", async function () {
+        const response = await request(app).patch(`/items/0`);
+        expect(response.statusCode).toBe(404);
+    });
+});
 describe("DELETE /items/:name", function () {
     test("Deletes a single a item", async function () {
         const response = await request(app)
@@ -62,23 +79,4 @@ describe("POST /items", function () {
 });
 
 
-// does not work
-describe("PATCH /items/:name", function () {
-    test("Updates a single item", async function () {
-        const response = await request(app)
-            .patch(`/items/${item.name}`)
-            .send({
-                name: "Troll"
-            });
-        expect(response.statusCode).toBe(200);
-        expect(response.body.item).toEqual({
-            name: "Troll"
-        });
-    });
-
-    test("Responds with 404 if can't find item", async function () {
-        const response = await request(app).patch(`/items/0`);
-        expect(response.statusCode).toBe(404);
-    });
-});
 

@@ -32,10 +32,8 @@ router.post('', (req, res, next) => {
 
 router.delete('/:name', (req, res, next) => {
     try {
-        console.log(req.params.name);
-        debugger;
+
         Item.remove(req.params.name);
-        console.log(req.params.name);
         return res.json({ message: 'deleted' });
 
     }
